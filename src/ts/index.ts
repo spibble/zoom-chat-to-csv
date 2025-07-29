@@ -1,10 +1,6 @@
 console.log("Hello world")
 
-/*
-    Things to impl:
-    - in "Options", once a user uploads a file, add the name of the file after "File:" for clarity
-*/
-
+// Shows/hides relevant options
 function toggleOptions(category: string) {
     let checkbox = null;
 
@@ -29,3 +25,7 @@ function toggleOptions(category: string) {
         optionsDiv.style.display = "none";
     }
 }
+
+function showPreview() {}
+
+document.getElementById('upload-file').addEventListener('change', showPreview);

@@ -26,9 +26,12 @@
         </div>
       </noscript>
       <div class="window">
-        <h2>Options</h2>
+        <div class="window-header">
+          <h2>Options</h2>
+        </div>
+        
         <div class="drag-and-drop">
-          <p>File: <span class="input-file" id="input-file"><button>Upload file or drag and drop</button></span></p>
+          <p>File: <span class="input-file" id="input-file"><input type="file" id="upload-file" name="filename" accept=".txt"></span></p>
         </div>
         <div class="usernames">
           <form>
@@ -36,7 +39,23 @@
             <label for="extract-usernames">Username extraction</label>
           </form>
           <div class="options" id="usernames-options">
-            test
+            <p>Delimiters:</p>
+            <form>
+              <div class="form-input">
+                <input type="radio" name="delim-type" id="username-delim-parenthesis" value="parenthesis">
+                <label for="parenthesis">Parentheses: ()</label>
+              </div>
+              <div class="form-input">
+                <input type="radio" name="delim-type" id="username-delim-brackets" value="brackets">
+                <label for="parenthesis">Brackets: []</label>
+              </div>
+              <div class="form-input">
+                <input type="radio" name="delim-type" id="username-delim-custom" value="custom">
+                <label for="parenthesis">Custom (space separated):</label>
+                <input type="text" id="username-delim" placeholder="() [] <>">
+              </div>
+              <button>Apply</button>
+            </form>
           </div>
         </div>
         <div class="participation">
@@ -45,12 +64,23 @@
             <label for="track-participation">Participation tracking</label>
           </form>
           <div class="options" id="participation-options">
-            test
+            <p>Enter participation windows:</p>
+            <form>
+              <div class="form-input">
+                <textarea rows="10"></textarea>
+              </div>
+              <button>Apply</button>
+            </form>
           </div>
         </div>
       </div>
       <div class="window">
-        <h2>Preview</h2>
+        <div class="window-header">
+          <h2>Preview</h2>
+          <button class="download-button"><i class="fa-solid fa-download"></i></button>
+          <p id="text-feedback"></p>
+        </div>
+        
       </div>
     </main>
     <footer>
