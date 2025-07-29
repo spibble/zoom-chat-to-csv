@@ -1,8 +1,9 @@
-frontend/ts/node_modules
-frontend/ts/*.js
-frontend/ts/*.js.map
+app/bin
+app/include
+app/lib
 
-backend/bin
-backend/include
-backend/lib
-backend/pyvenv.cfg
+app/static/ts/node_modules
+app/static/ts/index.js
+app/static/ts/index.js.map
+
+app/pyvenv.cfg
