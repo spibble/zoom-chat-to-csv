@@ -1,7 +1,7 @@
 @import url();
 
 :root {
-    font-family: 'Telex';
+    font-family: 'IBM Plex Sans';
 }
 
 body {
@@ -10,17 +10,70 @@ body {
 }
 
 header {
+    color: white;
+    background-color: rgba(45, 140, 255, 1);
+    text-align: center;
+
+    padding: 0.5rem;
+    margin: 0;
+}
+
+h1 {
+    margin: 0.5rem;
+}
+
+.main-window {
     padding: 1rem;
     margin: 0;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.window {
+    background-color: rgba(240, 240, 240, 1);
+    border-radius: 1rem;
+
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.window div {
+    padding: 1rem;
+}
+
+.drag-and-drop {
+    display: inline-block;
+}
+
+.input-file {
+    text-decoration: underline;
+}
+
+.input-file button {
+    margin-left: 0.5rem;
+}
+
+.options {
+    display: none;
+
+}
+
+.window.alert {
+    background-color: rgba(255, 235, 180, 1)
 }
 
 footer {
     color: white;
-    background-color: black;
+    background-color: rgba(45, 140, 255, 1);
     text-align: center;
 
     padding: 1rem;
     margin: 0;
+}
+
+footer p {
+    margin: 0.5rem;
 }
 
 footer i {

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="main.css">
     <!-- For pulling custom font from Google Fonts -->
     <link
-      href="https://fonts.googleapis.com/css?family=Telex"
+      href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans"
       rel="stylesheet">
     <!-- For pulling icons from FontAwesome -->
     <link 
@@ -19,11 +19,42 @@
     <header>
       <h1>Zoom Chat to CSV</h1>
     </header>
-    <main>
-
+    <main class="main-window">
+      <noscript>
+        <div class="window alert">
+          <p><i class="fa-solid fa-triangle-exclamation"></i> This tool requires JavaScript to work! Please enable it on your web browser, or use the local version of the tool, which is available here.</p>
+        </div>
+      </noscript>
+      <div class="window">
+        <h2>Options</h2>
+        <div class="drag-and-drop">
+          <p>File: <span class="input-file" id="input-file"><button>Upload file or drag and drop</button></span></p>
+        </div>
+        <div class="usernames">
+          <form>
+            <input type="checkbox" id="extract-usernames" value="extract-usernames" onclick="toggleOptions('usernames')">
+            <label for="extract-usernames">Username extraction</label>
+          </form>
+          <div class="options" id="usernames-options">
+            test
+          </div>
+        </div>
+        <div class="participation">
+          <form>
+            <input type="checkbox" id="track-participation" value="track-participation" onclick="toggleOptions('participation')">
+            <label for="track-participation">Participation tracking</label>
+          </form>
+          <div class="options" id="participation-options">
+            test
+          </div>
+        </div>
+      </div>
+      <div class="window">
+        <h2>Preview</h2>
+      </div>
     </main>
     <footer>
-      <p>developed by spibble</p>
+      <p>developed by spibble!</p>
       <p><a href="https://github.com/spibble/zoom-chat-to-csv"><i class="fa-brands fa-github"></i> view source code</a></p>
     </footer>
     <script src="ts/index.js"></script>
