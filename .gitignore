@@ -2,8 +2,9 @@ app/bin
 app/include
 app/lib
 
-app/static/ts/node_modules
+app/node_modules
 app/static/ts/index.js
 app/static/ts/index.js.map
 
 app/pyvenv.cfg
+.vercel

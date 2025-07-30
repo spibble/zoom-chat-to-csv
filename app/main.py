@@ -5,7 +5,7 @@ from flask import render_template
 app = Flask(__name__)
 
 @app.route('/')
-def my_form():
+def show_page():
     print("test")
     return render_template("index.html")
 
