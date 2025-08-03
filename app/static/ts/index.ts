@@ -1,7 +1,7 @@
 console.log("Hello world")
 
-// Shows/hides relevant options
-function toggleOptions(category: string) {
+// Shows/hides relevant options for checkboxes in the "Options" panel.
+function toggleOptions(category: string): void {
     let checkbox = null;
 
     switch(category) {
@@ -26,6 +26,44 @@ function toggleOptions(category: string) {
     }
 }
 
-function showPreview() {}
+// Takes uploaded .txt file and sends it to the backend
+function processFile(f: File): void {
+    console.log(`File received: ${f.name}`);
+    console.log(`File type (should be text): ${f.type}`);
 
-document.getElementById('upload-file').addEventListener('change', showPreview);
+    if (f.type != "text/plain") {
+        console.error("Uploaded file is not a text file!");
+        return;
+    }
+
+    sendFile(f);
+}
+
+function sendFile(f: File) {
+    const request = new XMLHttpRequest;
+    const formData = new FormData();
+    formData.append('file', f);
+
+    console.log("sending file...");
+    request.open('POST', '/upload');
+    request.send(formData);
+
+}
+
+// Renders a preview of the generated .csv file.
+function showPreview(): void {}
+
+// Shows/hides the download button when a .csv file is rendered/unrendered.
+function toggleDownload(): void {}
+
+document.getElementById('upload-file').addEventListener('change', function(e) {
+    const target = e.target as HTMLInputElement;
+    const file = target.files[0];
+
+    if (!file) {
+        console.error("File upload failed!");
+        return;
+    }
+
+    processFile(file);
+});

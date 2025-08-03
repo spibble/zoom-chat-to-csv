@@ -7,6 +7,6 @@
     "sourceMap": true
   },
   "files": [
-    "ts/index.ts"
+    "app/static/ts/index.ts"
   ]
 }
