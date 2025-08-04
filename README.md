@@ -1,7 +1,12 @@
 # zoom-chat-to-csv
 A web tool that takes in a Zoom chat log and spits out a CSV file for easier analysis. This tool is an extended version of an internal one I developed to make tracking lecture attendance & participation easier for remote classes, since for some reason, Zoom does not provide this functionality by default.<sup>1</sup> I figured there's a chance someone else might find it useful.
 
-This app uses vanilla HTML/CSS and TypeScript for the frontend, and Python/Flask for the backend. Hosting is done via Vercel. Check it out at (link coming soon)! Locally hostable and offline CLI versions will be made available in the future.
+This app uses vanilla **HTML/CSS** and **TypeScript** for the frontend, and **Python/Flask** for the backend. Hosting is done via **Vercel**. Check it out at (link coming soon)!
+
+If you would like to run this app locally:
+  1. Clone the repo: `git clone https://github.com/spibble/zoom-chat-to-csv.git`
+  2. Spin up a dev server: `vercel dev`
+  3. Once you see `> Ready! Available at [url]` in your terminal, navigate to `url` in your web browser
 
 <sub>1. Actually, [apparently they do](https://www.reddit.com/r/Zoom/comments/10k8og1/exporting_channel_chat_history_to_csv_no_longer/), but it's a total PITA to use</sub>
 ## Features
