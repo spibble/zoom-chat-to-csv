@@ -47,7 +47,6 @@ function sendFile(f: File) {
     console.log("sending file...");
     request.open('POST', '/upload');
     request.send(formData);
-
 }
 
 // Renders a preview of the generated .csv file.
@@ -67,3 +66,22 @@ document.getElementById('upload-file').addEventListener('change', function(e) {
 
     processFile(file);
 });
+
+/*
+document.getElementById('options-apply').addEventListener('click', function(e) {
+    const form = document.getElementById('delimiters-form')
+
+    // copied from stackoverflow
+    var rates = document.getElementsByName('rate');
+    var rate_value;
+    for(var i = 0; i < rates.length; i++){
+        if(rates[i].checked){
+            rate_value = rates[i].value;
+        }
+    }
+})
+
+document.getElementById('participation-apply').addEventListener('click', function(e) {
+
+})
+*/
