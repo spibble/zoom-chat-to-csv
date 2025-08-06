@@ -5,8 +5,8 @@ This app uses vanilla **HTML/CSS** and **TypeScript** for the frontend, and **Py
 
 If you would like to run this app locally:
   1. Clone the repo: `git clone https://github.com/spibble/zoom-chat-to-csv.git`
-  2. Spin up a dev server: `vercel dev`
-  3. Once you see `> Ready! Available at [url]` in your terminal, navigate to `url` in your web browser
+  3. Spin up a dev server: `npm run dev`
+  4. Once you see `> Ready! Available at [url]` in your terminal, navigate to `url` in your web browser
 
 <sub>1. Actually, [apparently they do](https://www.reddit.com/r/Zoom/comments/10k8og1/exporting_channel_chat_history_to_csv_no_longer/), but it's a total PITA to use</sub>
 ## Features
