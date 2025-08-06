@@ -1,33 +1,16 @@
 # chat_processor.py: Script containing functionality for parsing text chat logs into nice CSV files.
 
 # TODO: trim down this file
-import argparse
 import re
 from datetime import datetime
 import csv
 
+LOG_FILEPATH  = 'chat_log.txt'
+CSV_FILEPATH  = 'processed_chat_log.csv'
+
+CONSOLE_PREFIX = '[chat processor]'
+
 # Helpers
-def init_prog() -> argparse.ArgumentParser:
-    """
-    Creates a new ArgumentParser to handle command line arguments.
-
-    Returns:
-        argparse.ArgumentParser: The new ArgumentParser object.
-    """
-    
-    parser = argparse.ArgumentParser(
-        prog='zoom_chat_proc',
-        description='Converts a zoom chat log (in plaintext) to a manageable csv file.',
-        epilog='Example usage: python zoom_chat_proc.py lecture_chat.txt -o lecture_chat.csv -pe'
-    )
-    
-    parser.add_argument('chat_log', help='Zoom chat log (as a .txt file)')
-    parser.add_argument('-o', '--output', help='Specify an output path for the CSV file', required=False)
-    parser.add_argument('-e', action='store_true', help='Extract usernames from longer Zoom display names', required=False)
-    parser.add_argument('-p', action='store_true', help='Toggle participation tracking', required=False)
-    
-    return parser
-
 def extract_username(username: str) -> str:
     """
     Takes a Zoom display name of the form "Name (uniqueID)" and gets only the "uniqueID" portion of the name.
@@ -169,7 +152,7 @@ def parse_chat_log(chat_log: str, extract: bool) -> dict[str, list[tuple[datetim
 
         return user_data
 
-def write_csv(user_data: dict[str, list[tuple[datetime, str]]], output_path: str):
+def write_csv(user_data: dict[str, list[tuple[datetime, str]]], output_path: str, p_flag: bool):
     """
     Takes in a dict of usernames and associated messages and formats them in a nice CSV with an optional count of number of earned participation points.
 
@@ -180,7 +163,7 @@ def write_csv(user_data: dict[str, list[tuple[datetime, str]]], output_path: str
     max_message_count = max(len(msgs) for msgs in user_data.values())
     
     header = ["username", "# of chats"]
-    if PARTICIPATION: 
+    if p_flag: 
         header += ["# of participation answers"]
     header += [f"message {i+1}" for i in range(max_message_count)]
     
@@ -192,7 +175,7 @@ def write_csv(user_data: dict[str, list[tuple[datetime, str]]], output_path: str
             num_msgs = len(messages)
             row = [user, num_msgs]
 
-            if PARTICIPATION:
+            if p_flag:
                 participated_windows = set()
                 for timestamp, _ in messages:
                     i = is_in_participation_group(timestamp)
@@ -205,7 +188,7 @@ def write_csv(user_data: dict[str, list[tuple[datetime, str]]], output_path: str
             row += msg_log
             writer.writerow(row)
     
-    if PARTICIPATION:
+    if p_flag:
         header = ["username", "# of chats", "# of participation answers"]
         header += [f"message {i+1}" for i in range(max_message_count)]
 
@@ -224,9 +207,23 @@ def write_csv(user_data: dict[str, list[tuple[datetime, str]]], output_path: str
                 msg_log = [msg for _, msg in messages]
                 row = [user, num_msgs] + msg_log
                 writer.writerow(row)
+
+def process_chat_log(e_flag: bool, delims: list[tuple], p_flag: bool, windows: list[list[tuple[str, str]]]) -> int:
+    with open(LOG_FILEPATH, 'r') as f:
+        f.read()
+        
+    print(f"{CONSOLE_PREFIX} parsing...")
+    user_data = parse_chat_log(LOG_FILEPATH, e_flag)
+    print(f"{CONSOLE_PREFIX} writing...")
+    write_csv(user_data, CSV_FILEPATH, p_flag)
+    print(f"{CONSOLE_PREFIX} job's done!")
     
-# Main logic
-if __name__ == '__main__':
+    with open(CSV_FILEPATH, 'r') as f:
+        f.read()
+
+import argparse
+
+def main():
     parser = init_prog()
     args = parser.parse_args()
     
@@ -256,3 +253,24 @@ if __name__ == '__main__':
     print("It's Writin' Time")
     write_csv(user_data, OUTPUT_PATH)
     print(f"All done! Output saved to: {OUTPUT_PATH}")
+
+def init_prog() -> argparse.ArgumentParser:
+    """
+    Creates a new ArgumentParser to handle command line arguments.
+
+    Returns:
+        argparse.ArgumentParser: The new ArgumentParser object.
+    """
+    
+    parser = argparse.ArgumentParser(
+        prog='zoom_chat_proc',
+        description='Converts a zoom chat log (in plaintext) to a manageable csv file.',
+        epilog='Example usage: python zoom_chat_proc.py lecture_chat.txt -o lecture_chat.csv -pe'
+    )
+    
+    parser.add_argument('chat_log', help='Zoom chat log (as a .txt file)')
+    parser.add_argument('-o', '--output', help='Specify an output path for the CSV file', required=False)
+    parser.add_argument('-e', action='store_true', help='Extract usernames from longer Zoom display names', required=False)
+    parser.add_argument('-p', action='store_true', help='Toggle participation tracking', required=False)
+    
+    return parser

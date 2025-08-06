@@ -75,6 +75,7 @@ main {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    width: 100%;
 }
 
 .drag-and-drop {
@@ -95,9 +96,11 @@ main {
     padding: 0;
 }
 
+/*
 .download-button {
     display: none;
 }
+*/
 
 textarea {
     width: 100%;

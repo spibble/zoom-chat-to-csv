@@ -1,5 +1,7 @@
 console.log("Hello world")
 
+
+
 // Shows/hides relevant options for checkboxes in the "Options" panel.
 function toggleOptions(category: string): void {
     let checkbox = null;
@@ -39,6 +41,7 @@ function processFile(f: File): void {
     sendFile(f);
 }
 
+// Helper fn. to send file
 function sendFile(f: File) {
     const request = new XMLHttpRequest;
     const formData = new FormData();
@@ -66,6 +69,31 @@ document.getElementById('upload-file').addEventListener('change', function(e) {
 
     processFile(file);
 });
+
+/* copied from reddit, study later */
+let downloadBtn = document.getElementById('download-button')
+downloadBtn.addEventListener('click', downloadFile)
+
+function downloadFile() {
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (xhttp.status === 200 && xhttp.readyState === 4) {
+        let blob = new Blob([xhttp.response], { type: "text/csv" });
+        let url = window.URL.createObjectURL(blob);
+        let link = document.createElement("a");
+        link.href = url;
+        link.download = "processed_chat.csv";
+        link.style.display = "none";
+        document.body.appendChild(link);
+        link.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(link);
+        }
+    };
+    xhttp.open("POST", "/download", true);
+    xhttp.responseType = "blob";
+    xhttp.send();
+}
 
 /*
 document.getElementById('options-apply').addEventListener('click', function(e) {
