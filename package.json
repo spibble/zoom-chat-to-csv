@@ -1,0 +1,11 @@
+{
+  "name": "your-flask-app",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc && vc dev"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
