@@ -3,6 +3,7 @@
     "tsc": "^2.0.4"
   },
   "scripts": {
-    "dev": "tsc && vc dev"
+    "dev": "tsc && vc dev",
+    "build": "tsc"
   }
 }

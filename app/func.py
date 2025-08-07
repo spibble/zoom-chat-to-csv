@@ -3,9 +3,9 @@
 import os
 from typing import BinaryIO, Final
 
-LOG_FILEPATH  = 'chat_log.txt'
-TEMP_FILEPATH = 'temp.txt'
-CSV_FILEPATH  = 'processed_chat_log.csv'
+LOG_FILEPATH  = '/tmp/chat_log.txt'
+TEMP_FILEPATH = '/tmp/temp.txt'
+CSV_FILEPATH  = '/tmp/processed_chat_log.csv'
 
 extract_usernames = False
 delimiters = []

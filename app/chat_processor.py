@@ -4,8 +4,8 @@ import re
 from datetime import datetime
 import csv
 
-LOG_FILEPATH  = 'chat_log.txt'
-CSV_FILEPATH  = 'processed_chat_log.csv'
+LOG_FILEPATH  = '/tmp/chat_log.txt'
+CSV_FILEPATH  = '/tmp/processed_chat_log.csv'
 
 CONSOLE_PREFIX = '[chat processor]'
 
