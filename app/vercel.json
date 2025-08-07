@@ -4,6 +4,5 @@
         {"src": "func.py", "use": "@vercel/python"},
         {"src": "chat_processor.py", "use": "@vercel/python"}
     ],
-    "buildCommand": "npx tsc",
     "routes": [{"src": "/(.*)", "dest": "main.py"}]
 }

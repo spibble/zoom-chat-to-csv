@@ -8,5 +8,8 @@
   },
   "files": [
     "app/static/ts/index.ts"
+  ],
+  "outDir": [
+    "app/static/ts"
   ]
 }
