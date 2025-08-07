@@ -40,6 +40,8 @@ main {
 
     display: flex;
     flex-direction: column;
+
+    max-height: calc(100vh - 9.625rem - 2rem)
 }
 
 .window {
@@ -52,8 +54,9 @@ main {
 ;
     max-width: 100%;
     min-height: 50%;
+    max-height: calc(100% - 4rem);
 
-    overflow: auto;
+    overflow: hidden
 }
 
 @media only screen and (min-width: 800px) {
@@ -62,9 +65,15 @@ main {
     }
 
     .window {
-        max-height: 100%;
+        max-height: calc(100% - 4rem);
         width: 50%;
     }
+}
+
+.preview-window {
+    display: none;
+    overflow: scroll;
+    max-height: 80%;
 }
 
 .window div {
@@ -94,6 +103,22 @@ main {
 .form-input {
     margin: 0;
     padding: 0;
+}
+
+table {
+    border: 1px solid;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid;
+    border-color: lightgray
+}
+
+td.blank {
+    background-color: lightgray
+    /* border-color: lightgray */
 }
 
 /*

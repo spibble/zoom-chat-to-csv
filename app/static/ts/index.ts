@@ -52,12 +52,6 @@ function sendFile(f: File) {
     request.send(formData);
 }
 
-// Renders a preview of the generated .csv file.
-function showPreview(): void {}
-
-// Shows/hides the download button when a .csv file is rendered/unrendered.
-function toggleDownload(): void {}
-
 document.getElementById('upload-file').addEventListener('change', function(e) {
     const target = e.target as HTMLInputElement;
     const file = target.files[0];
@@ -69,6 +63,22 @@ document.getElementById('upload-file').addEventListener('change', function(e) {
 
     processFile(file);
 });
+
+let previewBtn = document.getElementById('preview-button')
+previewBtn.addEventListener('click', previewFile)
+
+function previewFile() {
+
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("preview-window").innerHTML = this.responseText;
+            document.getElementById("preview-window").style.display = 'block';
+        }
+    };
+    xhttp.open("GET", "/preview", true);
+    xhttp.send();
+}
 
 /* copied from reddit, study later */
 let downloadBtn = document.getElementById('download-button')

@@ -7,7 +7,6 @@ app = Flask(__name__)
 
 @app.route('/')
 def load_page():
-    # clean_files()
     return render_template("index.html")
 
 @app.route('/upload', methods=['POST'])
@@ -16,18 +15,17 @@ def process_text_file():
     
     if file is None:
         print("No file received :(")
-        return redirect("/")
-    
-    if save_text_file(file) == -1:
+    elif save_text_file(file) == -1:
         print("Error writing received file contents to file :(")
-        return redirect("/")
-    
-    update_options(True, True)
-    process_chat_log(extract_usernames, delimiters, track_participation, timestamps)
-    
-    
+    else:
+        update_options(True, True)
+        process_chat_log(extract_usernames, delimiters, track_participation, timestamps)
     
     return redirect("/")
+
+@app.route('/preview', methods=['GET'])
+def send_preview_html():
+    return csv_to_html_table(CSV_FILEPATH)
 
 @app.route('/download', methods=['POST'])
 def send_file_to_browser():

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Zoom Chat to CSV</title>
+    <link rel="icon" type="image/x-icon" href="../static/assets/favicon.png">
     <link rel="stylesheet" href="../static/main.css">
     <!-- For pulling custom font from Google Fonts -->
     <link
@@ -79,9 +80,12 @@
       <div class="window">
         <div class="window-header">
           <h2>Preview</h2>
-          <button class="download-button" id="download-button"><i class="fa-solid fa-download"></i></button>
-          <p id="text-feedback"></p>
+          <div>
+            <button class="preview-button" id="preview-button"><i class="fa-solid fa-eye"></i></button>
+            <button class="download-button" id="download-button"><i class="fa-solid fa-download"></i></button>
+          </div>
         </div>
+        <div class="preview-window" id="preview-window"></div>
         
       </div>
     </main>
