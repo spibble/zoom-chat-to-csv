@@ -161,6 +161,8 @@ def parse_chat_log(chat_log: str, extract: bool) -> dict[str, list[tuple[datetim
     """
     user_data = {}
     
+    print(extract)
+    
     with open(chat_log, "r", encoding="utf-8") as f:
         lines = f.readlines()
         
@@ -253,4 +255,3 @@ def write_csv(user_data: dict[str, list[tuple[datetime, str]]], output_path: str
                 msg_log = [msg for _, msg in messages]
                 row = [user, num_msgs] + msg_log
                 writer.writerow(row)
-

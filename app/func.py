@@ -1,17 +1,12 @@
 # func.py: Helper function code to keep main.py relatively lean.
 
 import os
+import json
 from typing import BinaryIO, Final
 
 LOG_FILEPATH  = '/tmp/chat_log.txt'
 TEMP_FILEPATH = '/tmp/temp.txt'
 CSV_FILEPATH  = '/tmp/processed_chat_log.csv'
-
-extract_usernames = False
-delimiters = []
-
-track_participation = False
-timestamps = []
 
 # Remove any old instances of files, if they exist
 def clean_files() -> None:
@@ -43,5 +38,13 @@ def save_text_file(file: BinaryIO) -> int:
     os.remove(TEMP_FILEPATH)
     return 0
 
-def update_options(e: bool, p: bool):
-    pass
+def parse_form_data(formData: str) -> list:
+    options_json = json.loads(formData)
+    options = [
+        options_json['extract'],
+        options_json['delimiters'].split(),
+        options_json['participation']
+    ]
+    
+    print(options)
+    return options

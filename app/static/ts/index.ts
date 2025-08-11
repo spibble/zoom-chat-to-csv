@@ -1,6 +1,6 @@
 console.log("Hello world")
 
-
+/* "Options" panel stuff */
 
 // Shows/hides relevant options for checkboxes in the "Options" panel.
 function toggleOptions(category: string): void {
@@ -28,41 +28,14 @@ function toggleOptions(category: string): void {
     }
 }
 
-// Takes uploaded .txt file and sends it to the backend
-function processFile(f: File): void {
-    console.log(`File received: ${f.name}`);
-    console.log(`File type (should be text): ${f.type}`);
-
-    if (f.type != "text/plain") {
-        console.error("Uploaded file is not a text file!");
-        return;
-    }
-
-    sendFile(f);
+// Records user input for options
+function applyOptions(extract: boolean, paticipation: boolean) {
 }
 
-// Helper fn. to send file
-function sendFile(f: File) {
-    const request = new XMLHttpRequest;
-    const formData = new FormData();
-    formData.append('file', f);
 
-    console.log("sending file...");
-    request.open('POST', '/upload');
-    request.send(formData);
-}
+/* "Preview" panel stuff */
 
-document.getElementById('upload-file').addEventListener('change', function(e) {
-    const target = e.target as HTMLInputElement;
-    const file = target.files[0];
 
-    if (!file) {
-        console.error("File upload failed!");
-        return;
-    }
-
-    processFile(file);
-});
 
 let previewBtn = document.getElementById('preview-button')
 previewBtn.addEventListener('click', previewFile)
@@ -80,7 +53,23 @@ function previewFile() {
     xhttp.send();
 }
 
-/* copied from reddit, study later */
+
+/* Backend stuff */
+
+document.getElementById('upload-file').addEventListener('change', function(e) {
+    const target = e.target as HTMLInputElement;
+    const file = target.files[0];
+
+    if (!file) {
+        console.error("File upload failed!");
+        return;
+    }
+
+    processFile(file);
+});
+
+
+// copied from reddit, study later
 let downloadBtn = document.getElementById('download-button')
 downloadBtn.addEventListener('click', downloadFile)
 
@@ -105,21 +94,42 @@ function downloadFile() {
     xhttp.send();
 }
 
-/*
-document.getElementById('options-apply').addEventListener('click', function(e) {
-    const form = document.getElementById('delimiters-form')
 
-    // copied from stackoverflow
-    var rates = document.getElementsByName('rate');
-    var rate_value;
-    for(var i = 0; i < rates.length; i++){
-        if(rates[i].checked){
-            rate_value = rates[i].value;
-        }
+// Takes uploaded .txt file and sends it to the backend
+function processFile(f: File): void {
+    console.log(`File received: ${f.name}`);
+    console.log(`File type (should be text): ${f.type}`);
+
+    if (f.type != "text/plain") {
+        console.error("Uploaded file is not a text file!");
+        return;
     }
-})
 
-document.getElementById('participation-apply').addEventListener('click', function(e) {
+    const myPromise = new Promise((resolve, reject) => {
+        sendFile(f);
+        resolve("done");
+    });
 
-})
-*/
+    myPromise.then(previewFile, error);
+}
+
+function error() { console.error("help") }
+
+// Helper fn. to send file
+function sendFile(f: File) {
+    const request = new XMLHttpRequest;
+    const form = new FormData();
+    form.append('file', f);
+
+    const formData = {
+        extract: true,
+        delimiters: "()",
+        participation: false
+    };
+
+    form.append('data', JSON.stringify(formData))
+
+    console.log("sending file...");
+    request.open('POST', '/upload');
+    request.send(form);
+}
