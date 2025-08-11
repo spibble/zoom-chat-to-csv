@@ -8,3 +8,5 @@ app/static/ts/index.js.map
 
 app/pyvenv.cfg
 .vercel
+
+node_modules
